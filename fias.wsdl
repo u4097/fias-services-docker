@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="fiasService" targetNamespace="http://basis.ru/nsi/fias" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://basis.ru/nsi/fias" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema elementFormDefault="unqualified" targetNamespace="http://basis.ru/nsi/fias" version="1.0" xmlns:tns="http://basis.ru/nsi/fias" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="getAddressObject" type="tns:getAddressObject"/>
+<xs:element name="getAddressObjectResponse" type="tns:getAddressObjectResponse"/>
+<xs:element name="getAddressObjects" type="tns:getAddressObjects"/>
+<xs:element name="getAddressObjectsResponse" type="tns:getAddressObjectsResponse"/>
+<xs:complexType name="getAddressObject">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="guid" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="getAddressObjectResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:addressObject"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="addressObject">
+    <xs:sequence>
+      <xs:element name="actStatus" type="xs:int"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="children" nillable="true" type="tns:addressObject"/>
+      <xs:element minOccurs="0" name="code" type="xs:string"/>
+      <xs:element minOccurs="0" name="guid" type="xs:string"/>
+      <xs:element name="hasChildren" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="id" type="xs:string"/>
+      <xs:element minOccurs="0" name="level" type="xs:int"/>
+      <xs:element minOccurs="0" name="offName" type="xs:string"/>
+      <xs:element minOccurs="0" name="parentGuid" type="xs:string"/>
+      <xs:element minOccurs="0" name="postalCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="shortName" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="getAddressObjects">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="parentGuid" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="getAddressObjectsResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:addressObject"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getAddressObjectResponse">
+    <wsdl:part element="tns:getAddressObjectResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAddressObject">
+    <wsdl:part element="tns:getAddressObject" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAddressObjects">
+    <wsdl:part element="tns:getAddressObjects" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAddressObjectsResponse">
+    <wsdl:part element="tns:getAddressObjectsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="FiasEndpoint">
+    <wsdl:operation name="getAddressObject">
+      <wsdl:input message="tns:getAddressObject" name="getAddressObject">
+    </wsdl:input>
+      <wsdl:output message="tns:getAddressObjectResponse" name="getAddressObjectResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAddressObjects">
+      <wsdl:input message="tns:getAddressObjects" name="getAddressObjects">
+    </wsdl:input>
+      <wsdl:output message="tns:getAddressObjectsResponse" name="getAddressObjectsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="fiasServiceSoapBinding" type="tns:FiasEndpoint">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getAddressObject">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getAddressObject">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAddressObjectResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAddressObjects">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getAddressObjects">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAddressObjectsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="fiasService">
+    <wsdl:port binding="tns:fiasServiceSoapBinding" name="FiasEndpointImplPort">
+      <soap:address location="http://127.0.0.1:8080/fias/ws/fias"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
