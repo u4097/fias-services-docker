@@ -8,7 +8,7 @@ services:
     ports:
       - "8080:8080"
     networks:
-      - backend
+      - net 
 
   db:
     image: mariadb 
@@ -16,7 +16,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     networks:
-      - backend
+      - net 
     ports:
       - 3306:3306
     volumes:
@@ -28,14 +28,13 @@ services:
       MYSQL_PASSWORD: fias123
 
   adminer:
-    container_name: adminer
     image: adminer
+    container_name: adminer
     restart: always
     networks:
-      - backend
+      - net 
     ports:
       - 8090:8080
 
 networks:
-     backend:
-        driver: "bridge"
+     net:
